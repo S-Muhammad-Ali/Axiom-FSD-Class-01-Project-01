@@ -31,30 +31,41 @@ function isValidEmail(email) {
     return re.test(String(email).toLowerCase());
 }
 
-// function to check if required fields have data
-function checkRequired(inputArray) {
-    inputArray.forEach(function (input) {
-        if (input.value === '') {
-            console.log(input.id);
-            //Sir Altaf show a different method by creating a new funtion but my below testing also work for case issue
-            // showErrors(input, `${input.id.charAt(0).toUpperCase() + input.id.slice(1)} is required`)
-            showErrors(input, `${getfieldId(input)} is required`)
-        } else {
-            showSuccess(input)
-        }
-    })
-}
-
-// Function to get the id of the inout field
-function getfieldId(input) {
-    return input.id.charAt(0).toUpperCase() + input.id.slice(1);
-}
-
 // Event Listeners
 // Creat event listner for submit button
 form.addEventListener('submit', function (e) {
     // Stop page from reloding on submit
     e.preventDefault();
 
-    checkRequired([username, email, password, confirmPass]);
+    // Check to see if fields meet the required field requirement
+    // check if username input is empty
+    if (username.value === '') {
+        // old & annoying for user percpective alert('email is required')
+        showErrors(username, 'username is required')
+    } else {
+        showSuccess(username);
+    }
+
+    // check if email input is empty
+    if (email.value === '') {
+        showErrors(email, 'Email is required');
+    } else if (!isValidEmail(email.value)) {
+        showErrors(email, 'Email is invalid')
+    } else {
+        showSuccess(email);
+    }
+
+    // check if password input is empty
+    if (password.value === '') {
+        showErrors(password, 'Password is required')
+    } else {
+        showSuccess(password);
+    }
+
+    // check if confirm password input is empty
+    if (confirmPass.value === '') {
+        showErrors(confirmPass, 'Password confirmation is required')
+    } else {
+        showSuccess(confirmPass);
+    }
 });
