@@ -70,7 +70,7 @@ body {
 }
 
 .form-control.error input {
-    background-color: var(--error-color);
+    border: solid var(--error-color);
 }
 
 .form-control small {
